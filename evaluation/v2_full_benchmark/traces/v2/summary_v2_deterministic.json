@@ -1,0 +1,19 @@
+{
+  "run_id": "v2_deterministic",
+  "total_requests": 250,
+  "error_count": 0,
+  "latency_ms": {
+    "avg": 9.14,
+    "p50": 9.89,
+    "p95": 16.69,
+    "min": 1.38,
+    "max": 26.05
+  },
+  "llm_calls_per_request": {
+    "avg": 0.0,
+    "max": 0
+  },
+  "fallback_count": 0,
+  "fallback_rate": 0.0,
+  "output_file": "c:\\Users\\Yashansh Rastogi\\Downloads\\Fintech Guru\\evaluation\\v2_full_benchmark\\traces\\v2\\2026-09-16\\v2_deterministic.jsonl"
+}

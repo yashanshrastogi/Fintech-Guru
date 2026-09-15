@@ -11,9 +11,16 @@ from typing import Dict, List, Optional, Set, Tuple
 from collections import defaultdict
 import statistics
 import logging
+import os
 
-from models import FinancialEvent, FinancialProfile, MessageEvidence
+# Phase 9 benchmark flag: set V2_FORCE_MEDIAN=true to reproduce V1 median-only behavior.
+# This flag is ONLY used by benchmark scripts (run_phase9.py) to compare V1 vs V2.
+# It must never be set in production. Financial calculations are otherwise unchanged.
+_V2_FORCE_MEDIAN: bool = os.getenv("V2_FORCE_MEDIAN", "false").lower() == "true"
+
+
 from fx import FXConverter
+from models import FinancialEvent, FinancialProfile, MessageEvidence
 
 logger = logging.getLogger(__name__)
 
@@ -296,19 +303,27 @@ def detect_recurring_patterns(
         #   - mean: better for stable/fixed patterns with low variance (req_08, req_17)
         #   - most_recent: wins most often but catastrophic on sparse/spiked history
         # Strategy: use mean when CV < 15% (stable), else median (robust to outliers)
+        #
+        # V2_FORCE_MEDIAN=true bypasses the adaptive strategy (V1-equivalent mode
+        # for Phase 9 benchmarking only — never set in production).
         float_amounts = [float(a) for a in amounts]
-        if len(float_amounts) >= 2:
-            _mean = statistics.mean(float_amounts)
-            _stdev = statistics.stdev(float_amounts)
-            _cv = _stdev / _mean if _mean > 0 else 1.0
-        else:
-            _cv = 0.0  # single value — treat as stable
+        # Re-read flag at call time (supports env var set after module import in tests)
+        _force_median = os.getenv("V2_FORCE_MEDIAN", "false").lower() == "true"
         
-        if _cv < 0.15:
-            # Stable pattern: use mean (more accurate for consistent amounts)
-            avg_amount = Decimal(str(round(statistics.mean(float_amounts), 2)))
+        if _force_median:
+            # V1-equivalent: always use median
+            avg_amount = Decimal(str(statistics.median(float_amounts)))
+        elif len(float_amounts) >= 2:
+            _mean_f = statistics.mean(float_amounts)
+            _stdev_f = statistics.stdev(float_amounts)
+            _cv = _stdev_f / _mean_f if _mean_f > 0 else 1.0
+            if _cv < 0.15:
+                # Stable pattern: use mean
+                avg_amount = Decimal(str(round(_mean_f, 2)))
+            else:
+                # Variable pattern: use median
+                avg_amount = Decimal(str(statistics.median(float_amounts)))
         else:
-            # Variable pattern: use median (robust to one-time spikes)
             avg_amount = Decimal(str(statistics.median(float_amounts)))
         
         # Find next expected date AFTER request_date

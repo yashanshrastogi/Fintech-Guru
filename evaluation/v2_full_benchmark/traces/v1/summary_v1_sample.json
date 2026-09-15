@@ -1,0 +1,19 @@
+{
+  "run_id": "v1_sample",
+  "total_requests": 25,
+  "error_count": 0,
+  "latency_ms": {
+    "avg": 9.65,
+    "p50": 11.89,
+    "p95": 17.31,
+    "min": 1.07,
+    "max": 18.51
+  },
+  "llm_calls_per_request": {
+    "avg": 0.0,
+    "max": 0
+  },
+  "fallback_count": 0,
+  "fallback_rate": 0.0,
+  "output_file": "c:\\Users\\Yashansh Rastogi\\Downloads\\Fintech Guru\\evaluation\\v2_full_benchmark\\traces\\v1\\2026-09-16\\v1_sample.jsonl"
+}

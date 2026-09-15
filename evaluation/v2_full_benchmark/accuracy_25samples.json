@@ -1,0 +1,36 @@
+{
+  "v1_equivalent": {
+    "n_samples": 25,
+    "exact_row": 4,
+    "exact_row_pct": 16.0,
+    "status_correct": 18,
+    "status_pct": 72.0,
+    "method_correct": 19,
+    "method_pct": 76.0,
+    "plan_correct": 19,
+    "plan_pct": 76.0,
+    "date_correct": 17,
+    "date_pct": 68.0,
+    "spending_correct": 22,
+    "spending_pct": 88.0,
+    "amount_mae": 653418.56,
+    "amount_max_error": 8370622.29
+  },
+  "v2_deterministic": {
+    "n_samples": 25,
+    "exact_row": 4,
+    "exact_row_pct": 16.0,
+    "status_correct": 18,
+    "status_pct": 72.0,
+    "method_correct": 19,
+    "method_pct": 76.0,
+    "plan_correct": 19,
+    "plan_pct": 76.0,
+    "date_correct": 17,
+    "date_pct": 68.0,
+    "spending_correct": 22,
+    "spending_pct": 88.0,
+    "amount_mae": 632458.72,
+    "amount_max_error": 7956073.96
+  }
+}

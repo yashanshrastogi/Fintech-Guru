@@ -1,0 +1,19 @@
+{
+  "run_id": "mode_A",
+  "total_requests": 25,
+  "error_count": 0,
+  "latency_ms": {
+    "avg": 9.94,
+    "p50": 12.15,
+    "p95": 18.06,
+    "min": 1.45,
+    "max": 18.62
+  },
+  "llm_calls_per_request": {
+    "avg": 0.0,
+    "max": 0
+  },
+  "fallback_count": 0,
+  "fallback_rate": 0.0,
+  "output_file": "c:\\Users\\Yashansh Rastogi\\Downloads\\Fintech Guru\\evaluation\\phase3_experiment\\traces\\2026-09-16\\mode_A.jsonl"
+}

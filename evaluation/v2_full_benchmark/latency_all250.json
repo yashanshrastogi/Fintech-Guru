@@ -1,0 +1,28 @@
+{
+  "v1_equivalent": {
+    "total_requests": 250,
+    "safety_violations": 0,
+    "row_count_ok": true,
+    "latency_ms": {
+      "avg": 8.93,
+      "p50": 9.55,
+      "p95": 16.76,
+      "min": 1.27,
+      "max": 20.33,
+      "stdev": 5.97
+    }
+  },
+  "v2_deterministic": {
+    "total_requests": 250,
+    "safety_violations": 0,
+    "row_count_ok": true,
+    "latency_ms": {
+      "avg": 9.49,
+      "p50": 10.19,
+      "p95": 17.17,
+      "min": 1.63,
+      "max": 26.66,
+      "stdev": 6.14
+    }
+  }
+}
