@@ -1,0 +1,28 @@
+{
+  "phase": "v2_baseline",
+  "mode": "deterministic",
+  "total_samples": 25,
+  "runtime_total_s": 0.259,
+  "runtime_avg_s": 0.01,
+  "metrics": {
+    "amount_exact": 4,
+    "amount_exact_pct": 16.0,
+    "status_correct": 18,
+    "status_correct_pct": 72.0,
+    "method_correct": 19,
+    "method_correct_pct": 76.0,
+    "plan_correct": 19,
+    "plan_correct_pct": 76.0,
+    "date_correct": 17,
+    "date_correct_pct": 68.0,
+    "spending_correct": 22,
+    "spending_correct_pct": 88.0,
+    "exact_row": 4,
+    "exact_row_pct": 16.0,
+    "amount_mae": 632458.72,
+    "amount_max_error": 7956073.96
+  },
+  "safety_violations": 0,
+  "llm_calls": 0,
+  "fallback_rate": 0.0
+}

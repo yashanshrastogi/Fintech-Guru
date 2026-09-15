@@ -142,7 +142,37 @@ def validate_and_repair(
     if not result.decision_explanation or len(result.decision_explanation.strip()) < 5:
         result.decision_explanation = _generate_fallback_explanation(result, request, profile)
     
+    # --- PHASE 6: Additional hard safety checks ---
+    
+    # 11. Payment schedule must not fall after desired_completion_date
+    if result.payment_plan and result.payment_plan != "none":
+        payments = _parse_payment_plan(result.payment_plan)
+        deadline = request.desired_completion_date
+        overdue = [p for p in payments if p[0] > deadline]
+        if overdue:
+            issues.append(
+                f"Payment schedule has {len(overdue)} payment(s) after deadline {deadline}. "
+                f"Reverting to not_recommended."
+            )
+            result.recommended_payment_method = NOT_RECOMMENDED
+            result.payment_plan = "none"
+            result.affordability_status = NOT_AFFORDABLE
+    
+    # 12. earliest_date_for_full_payment must not exceed desired_completion_date
+    if (result.earliest_date_for_full_payment and
+            result.earliest_date_for_full_payment > request.desired_completion_date and
+            result.affordability_status != NOT_AFFORDABLE):
+        issues.append(
+            f"earliest_date_for_full_payment {result.earliest_date_for_full_payment} "
+            f"exceeds desired_completion_date {request.desired_completion_date}. "
+            f"Setting to not_affordable."
+        )
+        result.affordability_status = NOT_AFFORDABLE
+        result.recommended_payment_method = NOT_RECOMMENDED
+        result.payment_plan = "none"
+    
     return result, issues
+
 
 
 def _parse_payment_plan(plan_str: str) -> List[Tuple[date, Decimal]]:

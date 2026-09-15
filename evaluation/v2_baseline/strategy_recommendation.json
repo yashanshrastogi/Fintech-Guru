@@ -1,0 +1,11 @@
+{
+  "recommended_strategy": "most_recent",
+  "win_counts": {
+    "mean": 2,
+    "most_recent": 9,
+    "median": 7,
+    "trimmed": 2,
+    "ewma": 1
+  },
+  "notes": "Choose strategy that minimizes MAE across all 21 amount-miss requests."
+}

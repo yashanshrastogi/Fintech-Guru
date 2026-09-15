@@ -158,21 +158,29 @@ def process_request(
             all_messages, profile, request, events_summary
         )
         
-        # Extract salary updates
+        # Extract salary updates — only apply if confidence >= 0.5
         if msg_interpretation.get("salary_updates", {}).get("new_amount"):
             su = msg_interpretation["salary_updates"]
+            confidence = float(su.get("confidence", 1.0))  # default 1.0 for legacy responses
             new_amount = to_decimal(su.get("new_amount"))
             if new_amount and new_amount > Decimal("0"):
-                # Convert to home currency if needed
-                currency = su.get("currency", profile.home_currency)
-                if currency != profile.home_currency:
-                    new_amount = fx.to_home_currency(new_amount, currency, profile.home_currency, req_date)
-                if new_amount:
-                    salary_updates["salary"] = new_amount
-                    logger.info(f"Salary update for {uid}: {new_amount} {profile.home_currency}")
+                if confidence >= 0.5:
+                    # Convert to home currency if needed
+                    currency = su.get("currency", profile.home_currency)
+                    if currency != profile.home_currency:
+                        new_amount = fx.to_home_currency(new_amount, currency, profile.home_currency, req_date)
+                    if new_amount:
+                        salary_updates["salary"] = new_amount
+                        logger.info(f"Salary update for {uid}: {new_amount} {profile.home_currency} (confidence={confidence:.2f})")
+                else:
+                    logger.warning(f"Salary update for {uid} SKIPPED — low confidence {confidence:.2f}: {new_amount}")
         
-        # Extract event amendments
+        # Extract event amendments — only apply if confidence >= 0.5
         for eid, amendment in msg_interpretation.get("event_amendments", {}).items():
+            confidence = float(amendment.get("confidence", 1.0))
+            if confidence < 0.5:
+                logger.warning(f"Amendment for {eid} SKIPPED — low confidence {confidence:.2f}: {amendment.get('action')}")
+                continue
             event_amendments[eid] = amendment
             if amendment.get("action") == "cancel":
                 # Mark event as cancelled

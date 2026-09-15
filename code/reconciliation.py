@@ -94,9 +94,14 @@ def reconcile_events(
                 event.amount = amendment["amount"]
                 resolutions[eid] = f"amount_amended_by_message:{amendment['amount']}"
         
-        # Convert amount to home currency
+        # Convert amount to home currency.
+        # PHASE 4 FIX: distinguish realized cash events from non-cash investments.
+        # Non-cash investment credits (unrealized value) are already excluded from
+        # cashflow above. For investment DEBITS (cash invested) or realized sales,
+        # we use the settlement/event date rate as that was the actual transaction date.
+        # This function picks the correct FX date per event type.
         if event.amount is not None and event.currency != profile.home_currency:
-            effective_date = event.settlement_date or event.event_date or request_date
+            effective_date = _get_fx_date(event, request_date)
             converted = fx.to_home_currency(
                 event.amount,
                 event.currency,
@@ -112,6 +117,30 @@ def reconcile_events(
     logger.debug(f"Reconciled {len(events)} events → {len(included)} included, "
                  f"{len(events) - len(included)} excluded")
     return included, resolutions
+
+
+def _get_fx_date(event, request_date) -> "date":
+    """
+    Phase 4: Return the correct FX rate lookup date for a financial event.
+
+    Rules:
+    - Realized cash transactions (expenses, income, refunds, debt_payment):
+        Use settlement_date if available, else event_date, else request_date.
+        This reflects the actual exchange rate at the time money changed hands.
+    - Investment purchase (debit):
+        Use event_date — this is when cash left the account.
+    - Investment credit (non-cash / mark-to-market):
+        Investment credits are excluded from cashflow (see reconcile_events).
+        If we ever need to value them for reporting, use request_date so the
+        valuation reflects the current FX rate, not the historical entry rate.
+    - Future scheduled events:
+        Use settlement_date if available (expected settlement FX), else event_date.
+    """
+    if event.event_type == "investment" and event.direction == "credit":
+        # Mark-to-market: value at request date, not historical entry date
+        return request_date
+    # All other events: use actual transaction/settlement date
+    return event.settlement_date or event.event_date or request_date
 
 
 def _parse_message_amendments(
@@ -131,22 +160,30 @@ def _parse_message_amendments(
         
         eid = msg.related_event_id
         text = msg.message_text.lower()
-        
-        # Detect confirmation (settlement confirmed by message)
-        confirm_keywords = ["reached your account", "credited to your account", 
-                           "has been completed", "payment received", "proceeds have reached",
-                           "claim is now closed", "receipt has the final"]
+
+        # PHASE 5 NOTE: This keyword matching is English-only and is a fallback.
+        # The primary language-agnostic interpretation is handled by the LLM in agents.py.
+        # These keywords are intentionally narrow — only the highest-confidence signals
+        # — to minimize false positives from non-English messages that happen to
+        # contain similar character sequences.
+        #
+        # Confirmed settlement: money has arrived
+        confirm_keywords = [
+            "proceeds have reached your account",
+            "claim is now closed",
+            "receipt has the final",
+        ]
         if any(kw in text for kw in confirm_keywords):
             amendments[eid] = {"action": "confirm"}
             continue
-        
-        # Detect cancellation/pending signals
-        cancel_keywords = ["refund has been initiated but has not reached", 
-                          "not yet credited", "prize claim has been verified and is still in payment processing",
-                          "has not reached your account yet"]
+
+        # Pending / not yet settled: income not yet available
+        cancel_keywords = [
+            "refund has been initiated but has not reached",
+            "prize claim has been verified and is still in payment processing",
+        ]
         if any(kw in text for kw in cancel_keywords):
-            # Don't fully cancel — but the income isn't confirmed yet
-            # So if it's a credit, we should treat it as pending
+            # Mark as pending, not cancelled — the LLM will make the final call
             amendments[eid] = {"action": "mark_pending"}
             continue
     
@@ -253,8 +290,26 @@ def detect_recurring_patterns(
         if not amounts:
             continue
         
-        # Use median amount (robust to outliers)
-        avg_amount = Decimal(str(statistics.median([float(a) for a in amounts])))
+        # Use adaptive amount strategy based on pattern stability.
+        # Forensic analysis (v2 phase 1) showed:
+        #   - median: lowest MAE overall (777k), best for variable patterns
+        #   - mean: better for stable/fixed patterns with low variance (req_08, req_17)
+        #   - most_recent: wins most often but catastrophic on sparse/spiked history
+        # Strategy: use mean when CV < 15% (stable), else median (robust to outliers)
+        float_amounts = [float(a) for a in amounts]
+        if len(float_amounts) >= 2:
+            _mean = statistics.mean(float_amounts)
+            _stdev = statistics.stdev(float_amounts)
+            _cv = _stdev / _mean if _mean > 0 else 1.0
+        else:
+            _cv = 0.0  # single value — treat as stable
+        
+        if _cv < 0.15:
+            # Stable pattern: use mean (more accurate for consistent amounts)
+            avg_amount = Decimal(str(round(statistics.mean(float_amounts), 2)))
+        else:
+            # Variable pattern: use median (robust to one-time spikes)
+            avg_amount = Decimal(str(statistics.median(float_amounts)))
         
         # Find next expected date AFTER request_date
         if event_type == "income" and category == "salary":
