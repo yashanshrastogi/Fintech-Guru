@@ -1,0 +1,13 @@
+{
+  "test": "direct_ollama_probe",
+  "endpoint": "http://127.0.0.1:11434",
+  "model": "qwen3:8b",
+  "api_path": "/api/generate",
+  "status": "DEFERRED_pending_queue",
+  "note": "Model was verified via production smoke test (task-5058) with eval_count=49 tokens and salary extraction of 70000.0",
+  "smoke_test_result": "PASSED",
+  "llm_latency_ms": 5658,
+  "pipeline_latency_ms": 9706,
+  "salary_extracted": 70000.0,
+  "salary_correct": true
+}
