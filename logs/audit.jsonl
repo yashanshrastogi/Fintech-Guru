@@ -1,0 +1,2 @@
+{"timestamp": 1789538591.672609, "request_id": "req_17fc2880", "user_id": "u1", "mode": "deterministic", "decision_status": "affordable_now", "decision_method": "full_payment", "decision_amount": 500.0, "latency_ms": 0.0}
+{"timestamp": 1789538591.677618, "request_id": "req_8472c049", "user_id": "u1", "mode": "agentic", "decision_status": "affordable_now", "decision_method": "full_payment", "decision_amount": 500.0, "latency_ms": 0.0}

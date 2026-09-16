@@ -1,6 +1,7 @@
 import logging
 import uuid
 import time
+import json
 from typing import List, Optional
 from datetime import date
 from decimal import Decimal
@@ -165,6 +166,24 @@ async def evaluate_request(req: EvaluationRequest):
         )
         
         latency = (time.time() - start_time) * 1000
+        
+        # Phase 22: Observability Audit Log
+        audit_log = {
+            "timestamp": time.time(),
+            "request_id": req_id,
+            "user_id": req.user_id,
+            "mode": req.mode,
+            "decision_status": pipeline_result["status"],
+            "decision_method": pipeline_result["method"],
+            "decision_amount": pipeline_result["amount"],
+            "latency_ms": latency
+        }
+        
+        # Ensure logs directory exists
+        import os
+        os.makedirs("logs", exist_ok=True)
+        with open("logs/audit.jsonl", "a") as f:
+            f.write(json.dumps(audit_log) + "\n")
         
         return EvaluationResponse(
             request_id=req_id,
