@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [isLogin, setIsLogin] = useState(true);
 
   const [messages, setMessages] = useState([
-    { role: 'system', content: 'Welcome to FinTech Guru. Tell me what you want to buy (e.g. "Can I afford a $1500 laptop?"). I will verify your safety constraint across the next 90 days.' }
+    { role: 'system', content: 'Hi! I’m FinTech Guru. I can help you evaluate purchases against your cash flow for the next 90 days. First, set up your current balance, minimum reserve, income, and recurring expenses.' }
   ]);
   const [input, setInput] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -256,10 +256,21 @@ export default function Dashboard() {
         <div className="flex-1 p-10 overflow-y-auto z-10 flex flex-col gap-8">
           
           {!decision && (
-            <div className="flex-1 flex flex-col items-center justify-center text-zinc-500 gap-4 opacity-50">
-              <Sparkles className="w-16 h-16 text-indigo-500/50" />
-              <h2 className="text-xl">I am FinTech Guru.</h2>
-              <p className="max-w-md text-center">Set up your profile or ask me if you can afford a purchase. I evaluate all decisions securely against a deterministic financial engine.</p>
+            <div className="flex-1 flex flex-col items-center justify-center text-zinc-500 gap-4 opacity-70">
+              <Sparkles className="w-16 h-16 text-indigo-500/50 mb-2" />
+              <h2 className="text-2xl font-semibold text-zinc-300">Welcome to FinTech Guru.</h2>
+              <p className="max-w-md text-center text-zinc-400">
+                To evaluate purchases securely against your cash flow, I need to know your financial context.
+              </p>
+              <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl p-6 mt-4 w-full max-w-lg shadow-lg">
+                <h3 className="text-zinc-200 font-medium mb-3">Set Up Financial Profile</h3>
+                <p className="text-sm text-zinc-500 mb-4">
+                  Tell me in the chat your current balance, minimum reserve, income, and recurring expenses.
+                </p>
+                <div className="text-sm bg-zinc-950 p-4 rounded-lg text-zinc-400 font-mono border border-zinc-800/50 leading-relaxed">
+                  "My balance is $5000, I want to keep $1000. My salary is $4000/mo and expenses are $2000/mo."
+                </div>
+              </div>
             </div>
           )}
 

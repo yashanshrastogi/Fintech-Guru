@@ -45,12 +45,13 @@ jobs:
       run: |
         alembic upgrade head
         
-    - name: Run Engine Tests
+    - name: Run All Tests
       env:
         DATABASE_URL: sqlite:///./test.db # Use sqlite for unit tests of engine if needed, or postgres
+        PYTHONPATH: ${{ github.workspace }}
       run: |
-        # Run failure injection suite which verifies the deterministic engine
-        pytest tests/test_failure_injection_suite.py -v --cov=core
+        # Run all tests instead of just failure injection
+        pytest tests/ -v --cov=core --cov=app --cov=validation --cov=optimization
         
     - name: Build Docker Image
       run: |

@@ -9,8 +9,18 @@ import time
 
 router = APIRouter()
 
+from pydantic import BaseModel
+from typing import Optional
+
+class WhatIfOverrides(BaseModel):
+    requested_amount: float
+    request_date: str
+    salary_change: Optional[float] = None
+    cancel_expense: Optional[str] = None
+    installment_months: Optional[int] = None
+
 @router.post("/")
-def evaluate_scenario(user_id: str, overrides: Dict[str, Any], db: Session = Depends(get_db)):
+def evaluate_scenario(user_id: str, overrides: WhatIfOverrides, db: Session = Depends(get_db)):
     # 1. Fetch base profile
     profile = db.query(FinancialProfile).filter(FinancialProfile.user_id == user_id).first()
     if not profile:
@@ -20,11 +30,11 @@ def evaluate_scenario(user_id: str, overrides: Dict[str, Any], db: Session = Dep
     # e.g., overrides = {"salary_change": 500, "cancel_expense": "Netflix", "requested_amount": 1200}
     
     cloned_priorities = list(profile.financial_priorities)
-    if "salary_change" in overrides:
+    if overrides.salary_change is not None:
         # Assuming current salary is stored, we add override to priorities
-        cloned_priorities.append(f"salary_override:{overrides['salary_change']}")
-    if "cancel_expense" in overrides:
-        cloned_priorities.append(f"cancel_override:{overrides['cancel_expense']}")
+        cloned_priorities.append(f"salary_override:{overrides.salary_change}")
+    if overrides.cancel_expense is not None:
+        cloned_priorities.append(f"cancel_override:{overrides.cancel_expense}")
         
     core_profile = UserProfile(
         user_id=profile.user_id,
@@ -36,16 +46,16 @@ def evaluate_scenario(user_id: str, overrides: Dict[str, Any], db: Session = Dep
         expense_categories_willing_to_reduce=profile.expense_categories_willing_to_reduce,
         expense_categories_willing_to_stop=profile.expense_categories_willing_to_stop,
         payment_methods_user_will_consider=profile.payment_methods_user_will_consider,
-        max_installment_months=overrides.get("installment_months", profile.max_installment_months)
+        max_installment_months=overrides.installment_months or profile.max_installment_months
     )
     
     purchase = PurchaseRequest(
         request_id=generate_uuid(),
         user_id=user_id,
         description="What-If Purchase",
-        request_amount=overrides.get("requested_amount", 0.0),
+        request_amount=overrides.requested_amount,
         currency=profile.home_currency,
-        request_date=overrides.get("request_date"),
+        request_date=overrides.request_date,
     )
     
     req = AffordabilityRequest(

@@ -166,9 +166,17 @@ def handle_chat(payload: ChatRequest, db: Session = Depends(get_db), current_use
 
     req.transactions = sim_events
 
-    # 4. Run Deterministic Engine
+    # 4. Run Pipeline
     try:
-        decision_dict = deterministic_pipeline(req)
+        from llm.router import route_request
+        from app.engine import multi_agent_fallback_handler
+        pipeline_result = route_request(
+            mode=req.mode,
+            deterministic_handler=deterministic_pipeline,
+            multi_agent_handler=multi_agent_fallback_handler,
+            req=req
+        )
+        decision_dict = pipeline_result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
         

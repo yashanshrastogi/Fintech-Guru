@@ -11,8 +11,17 @@ from app.api.dependencies.auth import get_current_user
 
 router = APIRouter()
 
+from pydantic import BaseModel
+from typing import Optional
+
+class AffordabilityEndpointRequest(BaseModel):
+    amount: float
+    date: str
+    currency: Optional[str] = None
+    description: Optional[str] = "Purchase"
+
 @router.post("/check")
-def check_affordability(purchase_request: Dict[str, Any], db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def check_affordability(purchase_request: AffordabilityEndpointRequest, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     start_time = time.time()
     user_id = current_user.user_id
     
@@ -38,10 +47,10 @@ def check_affordability(purchase_request: Dict[str, Any], db: Session = Depends(
     purchase = PurchaseRequest(
         request_id=generate_uuid(),
         user_id=user_id,
-        description=purchase_request.get("description", "Purchase"),
-        request_amount=purchase_request.get("amount", 0.0),
-        currency=purchase_request.get("currency", profile.home_currency),
-        request_date=purchase_request.get("date"),
+        description=purchase_request.description,
+        request_amount=purchase_request.amount,
+        currency=purchase_request.currency or profile.home_currency,
+        request_date=purchase_request.date,
     )
     
     # Generate the request payload for the engine
@@ -76,7 +85,7 @@ def check_affordability(purchase_request: Dict[str, Any], db: Session = Depends(
     record = DecisionRecord(
         request_id=purchase.request_id,
         user_id=user_id,
-        request_payload=purchase_request,
+        request_payload=purchase_request.model_dump(),
         status=decision_dict.get("status"),
         explanation=explanation_data,
         plans=plans_data

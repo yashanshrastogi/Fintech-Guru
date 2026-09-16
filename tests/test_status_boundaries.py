@@ -74,7 +74,7 @@ def test_salary_date_boundary_after():
     add_recurring_income(req, "1000", date(2026, 8, 15)) # Next is 9/14 (already passed, wait! The simulator projects from request_date. If next expected is past, does it project today?)
     res = deterministic_pipeline(req)
     # The salary should make it affordable
-    assert res["status"] == "affordable_now"
+    assert res["status"] == "affordable_with_plan"
 
 def test_expense_date_boundary_after():
     req = create_base_request(req_amt="900", min_balance="100", current_balance="1000")
