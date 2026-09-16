@@ -1,0 +1,27 @@
+{
+    "timestamp": "2026-09-16T08:59:55Z",
+    "git_commit": "55ea89149b0a33b2e6acfaef555ed8493b1f9a2c",
+    "dataset": {
+        "name": "evaluation/datasets/external_benchmark.jsonl",
+        "hash": "573A9A2B77FBF32272CE3EC3BBE6C70B897A333C04A1BC65DD9FF8412B5D7728",
+        "total_records": 100
+    },
+    "metrics": {
+        "status_accuracy_percentage": 100.0,
+        "status_correct_count": 100,
+        "qwen_success_count": 20,
+        "qwen_failure_count": 0,
+        "v1_fallback_count": 0,
+        "safety_boundary_passes": 100,
+        "safety_boundary_rejects": 0,
+        "observed_safety_violations": 0,
+        "deterministic_p50_latency_ms": 6.02,
+        "qwen_path_p95_latency_ms": 9838.99,
+        "regression_test_count": 55,
+        "regression_test_passes": 55
+    },
+    "router_paths": {
+        "deterministic": 80,
+        "agentic": 20
+    }
+}

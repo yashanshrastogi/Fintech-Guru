@@ -2,9 +2,9 @@ from enum import Enum
 from typing import List, Dict, Set, Tuple
 from decimal import Decimal
 import logging
+from datetime import date
 
-from core.models import FinancialEvent, FinancialProfile, MessageEvidence
-from core.fx import FXConverter
+from core.models import BaseEvent, UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -41,47 +41,56 @@ class EventLifecycle:
     }
 
     @staticmethod
-    def should_include(event: FinancialEvent, is_amended: bool = False) -> bool:
+    def should_include(event: BaseEvent, is_amended: bool = False) -> bool:
         """Determines if an event should be included in cashflow forecasting."""
         if is_amended or event.status in EventLifecycle.NON_CASH_STATUSES:
             return False
             
         # Unrealized investment credits are not liquid cash
-        if event.event_type == "investment" and event.direction == "credit":
+        if event.category == "investment" and getattr(event, "event_type", "") == "income":
             return False
             
         # Pending credits (income) are not trusted until settled/confirmed
-        if event.status == EventStatus.PENDING and event.direction == "credit":
+        if event.status == EventStatus.PENDING and getattr(event, "event_type", "") == "income":
             return False
             
         # Pending debits (expenses) ARE included to be conservative with cash
-        if event.status == EventStatus.PENDING and event.direction == "debit":
+        if event.status == EventStatus.PENDING and getattr(event, "event_type", "") == "expense":
             return True
             
         if event.status in EventLifecycle.REALIZED_STATUSES:
             return True
             
         # Initiated behaves like pending
-        if event.status == EventStatus.INITIATED and event.direction == "debit":
+        if event.status == EventStatus.INITIATED and getattr(event, "event_type", "") == "expense":
             return True
             
         return False
 
 def reconcile_events(
-    events: List[FinancialEvent],
-    profile: FinancialProfile,
-    request_date: str,
-    messages: List[MessageEvidence],
-    fx: FXConverter,
-) -> Tuple[List[FinancialEvent], Dict[str, str]]:
+    events: List[BaseEvent],
+    profile: UserProfile,
+    request_date: date,
+) -> Tuple[List[BaseEvent], Dict[str, str]]:
     """
     Reconcile financial events using deterministic precedence rules.
     Returns:
-    - List of events to include in cash flow (amounts converted to home currency)
+    - List of events to include in cash flow
     - Dict of event_id -> resolution reason (for audit)
     """
     resolutions: Dict[str, str] = {}
-    event_by_id: Dict[str, FinancialEvent] = {e.event_id: e for e in events}
+    
+    unique_events = []
+    seen_ids = set()
+    for e in events:
+        if e.event_id not in seen_ids:
+            unique_events.append(e)
+            seen_ids.add(e.event_id)
+        else:
+            resolutions[e.event_id] = "duplicate_id_removed"
+            
+    events = unique_events
+    event_by_id: Dict[str, BaseEvent] = {e.event_id: e for e in events}
     
     # 1. Duplicate & Supersession Phase
     amended_ids: Set[str] = set()
@@ -110,11 +119,7 @@ def reconcile_events(
                 # e itself replaces original, but e's status should be treated as confirmed
                 e.status = EventStatus.CONFIRMED
 
-    # 2. Message Extraction Amendment Phase
-    # (Leaving placeholder for Phase 9 Evidence Extraction. For now we skip modifying events via messages 
-    # unless they are explicitly passed as amendments).
-    
-    # 3. Inclusion & FX Phase
+    # 3. Inclusion Phase
     included = []
     for event in events:
         eid = event.event_id
@@ -125,23 +130,6 @@ def reconcile_events(
             continue
             
         if EventLifecycle.should_include(event):
-            # FX Conversion
-            if event.amount is not None and event.currency != profile.home_currency:
-                effective_date = event.settlement_date or event.event_date or request_date
-                try:
-                    converted = fx.to_home_currency(
-                        amount=event.amount,
-                        from_currency=event.currency,
-                        to_currency=profile.home_currency,
-                        date_str=str(effective_date)
-                    )
-                    event.amount_home_currency = converted
-                except Exception as e:
-                    logger.error(f"FX failure for {eid}: {e}")
-                    event.amount_home_currency = None
-            else:
-                event.amount_home_currency = event.amount
-                
             included.append(event)
             resolutions[eid] = "included"
         else:

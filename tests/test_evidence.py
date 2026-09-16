@@ -6,7 +6,7 @@ class MockLLMClient(LLMClient):
         super().__init__()
         self.raw_response = raw_response
         
-    def _call_llm(self, prompt: str) -> str:
+    def _call_llm(self, system: str, user: str) -> str:
         return self.raw_response
 
 def test_strict_json_parsing_valid():

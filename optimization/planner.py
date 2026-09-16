@@ -52,6 +52,7 @@ def generate_payment_plans(state: FinancialState, total_amount: Decimal, max_mon
                 "months": months,
                 "monthly_payment": float(monthly_payment),
                 "total_amount": float(total_amount),
+                "installments": [float(amt) for amt in installments],
                 "is_safe": True
             })
             

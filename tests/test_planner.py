@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 from core.state import FinancialState
-from core.models import RecurringPattern
+from core.models import RecurringExpense, RecurringIncome
 from optimization.planner import generate_payment_plans
 
 def test_planner_one_month_safe():
@@ -20,19 +20,18 @@ def test_planner_rejects_unsafe_one_month_but_accepts_multi():
         user_id="u1", request_date=date(2026, 9, 15), home_currency="USD",
         current_available_balance=Decimal("600"), minimum_balance_to_keep=Decimal("100"),
         recurring_income=[
-            RecurringPattern(
+            RecurringIncome(
                 user_id="u1", category="salary", direction="credit", average_amount=Decimal("1000"),
-                currency="USD", frequency_days=30, typical_day_of_month=1, flexibility="fixed",
-                minimum_allowed_amount=None, representative_event_id="e2",
-                last_date=date(2026, 9, 1), next_expected_date=date(2026, 10, 1), is_salary=True
+                currency="USD", frequency_days=30, typical_day_of_month=1,
+                last_date=date(2026, 9, 1), next_expected_date=date(2026, 10, 1), is_salary=True, source="Employer"
             )
         ],
         recurring_expenses=[
-            RecurringPattern(
+            RecurringExpense(
                 user_id="u1", category="rent", direction="debit", average_amount=Decimal("300"),
                 currency="USD", frequency_days=100, typical_day_of_month=None, flexibility="fixed",
-                minimum_allowed_amount=None, representative_event_id="e1", 
-                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16), is_salary=False
+                minimum_allowed_amount=None, 
+                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16)
             )
         ]
     )

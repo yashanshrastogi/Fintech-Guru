@@ -31,6 +31,12 @@ EVIDENCE_SYSTEM_PROMPT = (
     "If a field is not mentioned, use null or false as appropriate."
 )
 
+INTENT_SYSTEM_PROMPT = (
+    "You are a strict financial orchestration classifier. "
+    "You MUST respond with ONLY a valid JSON object and NOTHING else. "
+    "No prose, no markdown, no code fences, no <think> blocks in your final answer."
+)
+
 EVIDENCE_USER_TEMPLATE = (
     "Extract the following fields from the user message below into a JSON object:\n"
     "  extracted_salary: number (new annual/monthly salary if mentioned, else null)\n"
@@ -43,6 +49,31 @@ EVIDENCE_USER_TEMPLATE = (
     "Respond with ONLY the JSON object."
 )
 
+INTENT_USER_TEMPLATE = (
+    "Analyze the following user message and classify its intent.\n"
+    "Possible intents:\n"
+    " - GREETING: User says hi/hello.\n"
+    " - PROFILE_UPDATE: User provides their financial details (balance, income, expenses, reserve) to set up or update their profile.\n"
+    " - AFFORDABILITY_QUERY: User asks if they can afford a purchase (mentions an item and amount).\n"
+    " - WHAT_IF: User asks a hypothetical question modifying a previous purchase (e.g. 'what if I wait 30 days?').\n"
+    " - EXPLANATION: User asks 'why' or requests an explanation of the previous decision.\n"
+    " - HISTORY: User asks to see their past queries.\n"
+    " - GENERAL: General chat not fitting the above.\n"
+    " - UNSUPPORTED: Irrelevant or confusing.\n\n"
+    "Also extract relevant entities if present.\n"
+    "Schema:\n"
+    "{{\n"
+    "  \"intent\": \"<intent>\",\n"
+    "  \"reply\": \"<optional conversational response if GREETING, PROFILE_UPDATE, or GENERAL>\",\n"
+    "  \"amount\": <number or null>,\n"
+    "  \"description\": \"<string or null>\",\n"
+    "  \"overrides\": {{\"waiting_days\": <number>, \"payment_now\": <number>, \"salary_change\": <number>, \"cancel_expense_category\": \"<string>\"}},\n"
+    "  \"profile_data\": {{\"balance\": <number>, \"income\": <number>, \"expenses\": <number>, \"reserve\": <number>}}\n"
+    "}}\n\n"
+    "User message: \"{message}\"\n\n"
+    "JSON Response:"
+)
+
 DEFAULT_EVIDENCE = {
     "extracted_salary": None,
     "salary_effective_date": None,
@@ -50,6 +81,15 @@ DEFAULT_EVIDENCE = {
     "cancellation_request": False,
     "cancelled_category": None,
     "currency": None,
+}
+
+DEFAULT_INTENT = {
+    "intent": "UNSUPPORTED",
+    "reply": "I'm not sure how to handle that.",
+    "amount": None,
+    "description": None,
+    "overrides": {},
+    "profile_data": {}
 }
 
 
@@ -64,13 +104,38 @@ class LLMClient:
       - The deterministic engine uses the extracted facts.
     """
 
-    def __init__(self, endpoint: str = DEFAULT_ENDPOINT, model: str = MODEL_NAME):
-        self.endpoint = endpoint.rstrip("/")
-        self.model = model
+    def __init__(self, endpoint: str = None, model: str = None):
+        import os
+        self.endpoint = (endpoint or os.environ.get("OLLAMA_BASE_URL", DEFAULT_ENDPOINT)).rstrip("/")
+        self.model = model or os.environ.get("OLLAMA_MODEL", MODEL_NAME)
 
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
+
+    def analyze_message(self, text: str) -> Dict[str, Any]:
+        """
+        Classifies the intent and extracts entities for orchestration.
+        """
+        prompt = INTENT_USER_TEMPLATE.format(message=text.replace('"', "'"))
+        raw = self._call_llm(system=INTENT_SYSTEM_PROMPT, user=prompt)
+        
+        result = dict(DEFAULT_INTENT)
+        try:
+            clean = self._strip_think_blocks(raw)
+            if clean.startswith("```"):
+                clean = __import__("re").sub(r"^```[a-z]*\n?", "", clean)
+                clean = __import__("re").sub(r"\n?```$", "", clean)
+            clean = clean.strip()
+            if clean and clean != "{}":
+                data = json.loads(clean)
+                result.update(data)
+                
+            logger.info(f"[LLMClient] Parsed intent: {result['intent']}")
+        except Exception as e:
+            logger.error(f"[LLMClient] Failed to parse intent: {e}")
+            
+        return result
 
     def extract_evidence(self, text: str) -> Dict[str, Any]:
         """
@@ -89,14 +154,12 @@ class LLMClient:
 
     def _call_llm(self, system: str, user: str) -> str:
         """
-        Calls Ollama /api/generate.
-
-        Uses `stream: false` so we get a single complete response.
-        Uses `format: json` to nudge the model toward valid JSON output.
-        Prepends the system prompt into the prompt field (Ollama /api/generate
-        does not have a separate system field in all versions — we inline it).
+        Calls Ollama /api/generate with retries.
         """
         import requests
+        from requests.adapters import HTTPAdapter
+        from urllib3.util.retry import Retry
+        from app.config import settings
 
         full_prompt = f"[SYSTEM]\n{system}\n\n[USER]\n{user}"
 
@@ -110,12 +173,23 @@ class LLMClient:
                 "num_predict": 512,
             },
         }
+        
+        session = requests.Session()
+        retry = Retry(
+            total=settings.LLM_RETRY_LIMIT,
+            backoff_factor=1,
+            status_forcelist=[500, 502, 503, 504],
+            allowed_methods=["POST"]
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount("http://", adapter)
+        session.mount("https://", adapter)
 
         try:
-            resp = requests.post(
+            resp = session.post(
                 f"{self.endpoint}/api/generate",
                 json=payload,
-                timeout=REQUEST_TIMEOUT_SEC,
+                timeout=settings.LLM_TIMEOUT,
             )
             resp.raise_for_status()
             data = resp.json()
@@ -132,7 +206,7 @@ class LLMClient:
             logger.warning(f"[LLMClient] Ollama HTTP error: {e}")
             return "{}"
         except requests.exceptions.Timeout:
-            logger.warning(f"[LLMClient] Ollama request timed out after {REQUEST_TIMEOUT_SEC}s")
+            logger.warning(f"[LLMClient] Ollama request timed out after {settings.LLM_TIMEOUT}s")
             return "{}"
         except Exception as e:
             logger.warning(f"[LLMClient] Unexpected error calling Ollama: {e}")

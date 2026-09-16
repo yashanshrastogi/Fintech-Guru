@@ -1,0 +1,28 @@
+# Environments
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Database
+*.db
+*.sqlite3
+
+# Node / NextJS
+node_modules/
+.next/
+out/
+build/
+.pnp
+.pnp.js
+
+# Logs
+*.log
+logs/
+
+# MacOS
+.DS_Store

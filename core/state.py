@@ -1,11 +1,10 @@
-from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import List, Dict, Optional, Any
 from datetime import date
-from core.models import FinancialEvent, RecurringPattern
+from pydantic import BaseModel, Field
+from core.models import BaseEvent, RecurringExpense, RecurringIncome, EvidenceFact
 
-@dataclass
-class FinancialState:
+class FinancialState(BaseModel):
     """
     Unified representation of the exact financial state.
     Contains strictly reconciled events, projected recurring patterns, 
@@ -19,14 +18,14 @@ class FinancialState:
     minimum_balance_to_keep: Decimal
     
     # Strictly reconciled one-off events (pending/settled/confirmed)
-    reconciled_events: List[FinancialEvent] = field(default_factory=list)
+    reconciled_events: List[BaseEvent] = []
     
     # Projected recurring patterns using statistical forecasting
-    recurring_expenses: List[RecurringPattern] = field(default_factory=list)
-    recurring_income: List[RecurringPattern] = field(default_factory=list)
+    recurring_expenses: List[RecurringExpense] = []
+    recurring_income: List[RecurringIncome] = []
     
     # Overrides derived from LLM evidence extraction
-    evidence_overrides: Dict[str, Any] = field(default_factory=dict)
+    evidence_overrides: Dict[str, Any] = {}
     
     def get_effective_salary(self) -> Optional[Decimal]:
         """Returns the salary after applying any evidence-based overrides."""
@@ -42,7 +41,8 @@ class FinancialState:
     def is_event_cancelled(self, event_id: str) -> bool:
         """Checks if evidence extraction proved the user cancelled an event."""
         if self.evidence_overrides.get("cancellation_request"):
-            # In a full implementation, we'd map this to a specific event ID.
-            # For this pipeline, we track global cancellation requests.
-            return True
+            cancelled_list = self.evidence_overrides.get("cancelled_categories", [])
+            for c in cancelled_list:
+                if c.lower() in event_id.lower():
+                    return True
         return False

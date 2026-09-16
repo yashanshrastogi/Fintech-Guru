@@ -1,0 +1,33 @@
+{
+  "completion_percentage": 35.0,
+  "categories": {
+    "Core financial engine": { "weight": 20, "points": 20, "status": "VERIFIED" },
+    "Safety & validation": { "weight": 15, "points": 15, "status": "VERIFIED" },
+    "LLM/evidence": { "weight": 10, "points": 10, "status": "VERIFIED" },
+    "Evaluation": { "weight": 15, "points": 10, "status": "PARTIAL" },
+    "Backend/API": { "weight": 10, "points": 5, "status": "PARTIAL" },
+    "Frontend": { "weight": 15, "points": 0, "status": "NOT_STARTED" },
+    "Security/privacy": { "weight": 5, "points": 0, "status": "NOT_STARTED" },
+    "Deployment/operations": { "weight": 5, "points": 0, "status": "NOT_STARTED" },
+    "Documentation/portfolio": { "weight": 5, "points": 0, "status": "NOT_STARTED" }
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "phase": "A",
+      "description": "Core Financial Engine Audit",
+      "status": "IN_PROGRESS",
+      "evidence": null,
+      "tests": [],
+      "benchmark": null,
+      "files_changed": [],
+      "dependencies": [],
+      "blockers": [],
+      "last_verification_timestamp": null,
+      "verification_command": null,
+      "result": null,
+      "confidence": null,
+      "independently_validated": false
+    }
+  ]
+}

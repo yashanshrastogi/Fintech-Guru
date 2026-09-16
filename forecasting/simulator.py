@@ -3,13 +3,13 @@ from decimal import Decimal
 from typing import List, Tuple, Dict
 from collections import defaultdict
 
-from core.models import CashFlowDay
+from core.models import ForecastDay
 from core.state import FinancialState
 from forecasting.income import project_next_salary_date
 
 FORECAST_DAYS = 90
 
-def simulate_cashflow(state: FinancialState, extra_debits: List[Tuple[date, Decimal]] = None) -> List[CashFlowDay]:
+def simulate_cashflow(state: FinancialState, extra_debits: List[Tuple[date, Decimal]] = None) -> List[ForecastDay]:
     """
     Simulates a daily cash flow ledger over a 90-day horizon using a unified FinancialState.
     """
@@ -20,28 +20,42 @@ def simulate_cashflow(state: FinancialState, extra_debits: List[Tuple[date, Deci
     for event in state.reconciled_events:
         effective_date = event.settlement_date or event.event_date or state.request_date
         if state.request_date <= effective_date <= end_date:
-            amt = event.amount_home_currency or event.amount or Decimal("0")
-            is_debit = (event.direction == "debit")
+            amt = event.amount or Decimal("0")
+            # Assume any event not explicitly income is debit for conservatism
+            is_debit = (getattr(event, "event_type", "expense") == "expense")
             ledger[effective_date].append((amt, f"event:{event.event_id}", is_debit))
             
     # 2. Apply recurring expenses
     for exp in state.recurring_expenses:
+        if state.is_event_cancelled(exp.category):
+            continue
         next_d = exp.next_expected_date
         while next_d <= end_date:
             if next_d >= state.request_date:
                 ledger[next_d].append((exp.average_amount, f"recurring_exp:{exp.category}", True))
-            next_d += timedelta(days=exp.frequency_days)
+            if exp.frequency_days == 30:
+                # Use project_next_salary_date for month-aware 30-day expenses
+                next_d = project_next_salary_date(next_d, next_d.day, next_d)
+            else:
+                next_d += timedelta(days=exp.frequency_days)
             
     # 3. Apply recurring income (Salary)
+    salary_override_applied = False
     for inc in state.recurring_income:
         if inc.is_salary:
-            eff_salary = state.get_effective_salary()
+            eff_salary = inc.average_amount
+            if "extracted_salary" in state.evidence_overrides and state.evidence_overrides["extracted_salary"] is not None:
+                if salary_override_applied:
+                    continue
+                eff_salary = Decimal(str(state.evidence_overrides["extracted_salary"]))
+                salary_override_applied = True
+                
             if eff_salary is not None:
                 next_d = inc.next_expected_date
                 while next_d <= end_date:
                     if next_d >= state.request_date:
                         ledger[next_d].append((eff_salary, f"salary:{inc.category}", False))
-                    next_d = project_next_salary_date(next_d, inc.typical_day_of_month or 1, next_d)
+                    next_d = project_next_salary_date(next_d, inc.typical_day_of_month or next_d.day, next_d)
                     if not next_d:
                         break
         else:
@@ -77,13 +91,14 @@ def simulate_cashflow(state: FinancialState, extra_debits: List[Tuple[date, Deci
         opening = balance
         balance = opening + income - expenses
         
-        days.append(CashFlowDay(
-            day=current_date,
+        days.append(ForecastDay(
+            date=current_date,
             opening_balance=opening,
-            income=income,
-            expenses=expenses,
+            credits=income,
+            debits=expenses,
             closing_balance=balance,
-            events=event_refs
+            minimum_required=state.minimum_balance_to_keep,
+            is_breached=(balance < state.minimum_balance_to_keep)
         ))
         
         current_date += timedelta(days=1)

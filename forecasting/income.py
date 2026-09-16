@@ -29,8 +29,9 @@ def project_next_salary_date(last_date: date, typical_dom: int, current_date: da
         
         target_date = date(year, month, target_day)
         
-        # Must be strictly after current_date
-        if target_date > current_date:
+        # Must be strictly after last_date to avoid double counting, 
+        # but can be >= current_date to catch a salary arriving today that hasn't settled yet
+        if target_date > last_date and target_date >= current_date:
             return target_date
             
         # Move to next month

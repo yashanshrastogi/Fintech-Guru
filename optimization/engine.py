@@ -2,11 +2,12 @@ from decimal import Decimal
 from typing import List
 from datetime import date
 from core.state import FinancialState
-from forecasting.simulator import simulate_cashflow, CashFlowDay
+from forecasting.simulator import simulate_cashflow
+from core.models import ForecastDay
 
 ZERO = Decimal("0")
 
-def is_plan_safe(days: List[CashFlowDay], minimum_balance: Decimal) -> bool:
+def is_plan_safe(days: List[ForecastDay], minimum_balance: Decimal) -> bool:
     """Checks if the minimum closing balance across all days is >= minimum_balance."""
     if not days:
         return True
@@ -29,8 +30,15 @@ def find_max_safe_amount(state: FinancialState, requested_amount: Decimal) -> De
     if not is_plan_safe(baseline_days, state.minimum_balance_to_keep):
         return ZERO
         
+    # Day-0 Semantics: The purchase occurs before same-day income clears.
+    # The intraday balance must not drop below minimum_balance_to_keep.
+    # Therefore, the maximum payment today cannot exceed this initial headroom.
+    max_day_0_payment = state.current_available_balance - state.minimum_balance_to_keep
+    if max_day_0_payment <= ZERO:
+        return ZERO
+        
     low = ZERO
-    high = min(requested_amount, state.current_available_balance)
+    high = min(requested_amount, max_day_0_payment)
     
     if high <= ZERO:
         return ZERO

@@ -2,16 +2,11 @@ import json
 import argparse
 import time
 from pathlib import Path
-from decimal import Decimal
-from datetime import date
+from pydantic import ValidationError
 
-from core.models import FinancialProfile, FinancialEvent, RecurringPattern
-from core.state import FinancialState
-from optimization.engine import find_max_safe_amount
-from optimization.planner import generate_payment_plans
-
-def _parse_date(s: str) -> date:
-    return date.fromisoformat(s)
+from app.main import AffordabilityRequest
+from llm.router import route_request
+from app.main import deterministic_pipeline, multi_agent_fallback_handler
 
 def run_v2_engine(dataset_file: Path, output_file: Path):
     with open(dataset_file, "r") as f:
@@ -22,102 +17,51 @@ def run_v2_engine(dataset_file: Path, output_file: Path):
     for record in dataset:
         start_time = time.time()
         
-        req_id = record["request_id"]
-        inp = record["input"]
-        
-        # Parse profile
-        prof = inp["profile"]
-        profile = FinancialProfile(
-            user_id="u1", home_currency="USD",
-            current_available_balance=Decimal(str(prof["balance"])),
-            minimum_balance_to_keep=Decimal(str(prof["min_balance"])),
-            financial_priorities=[], expense_categories_to_protect=[],
-            expense_categories_willing_to_reduce=[], expense_categories_willing_to_stop=[],
-            payment_methods_user_will_consider=[], max_installment_months=3
-        )
-        
-        request_date = date(2026, 9, 15)
-        request_amount = Decimal(str(inp["request_amount"]))
-        
-        # Parse recurring events
-        recurring_expenses = []
-        recurring_income = []
+        try:
+            req = AffordabilityRequest(**record)
             
-        for e in inp.get("recurring_events", []):
-            pattern = RecurringPattern(
-                user_id="u1", category=e["category"], direction=e["direction"],
-                average_amount=Decimal(str(e["amount"])), currency="USD",
-                frequency_days=e["frequency_days"], typical_day_of_month=e.get("typical_day_of_month"),
-                flexibility="fixed", minimum_allowed_amount=None, representative_event_id="ex",
-                last_date=request_date, next_expected_date=_parse_date(e["next_date"]),
-                is_salary=(e["category"] == "salary")
+            pipeline_result = route_request(
+                mode=req.mode,
+                deterministic_handler=deterministic_pipeline,
+                multi_agent_handler=multi_agent_fallback_handler,
+                req=req
             )
-            if e["direction"] == "debit":
-                recurring_expenses.append(pattern)
-            else:
-                recurring_income.append(pattern)
-        
-        # Build State
-        state = FinancialState(
-            user_id="u1", request_date=request_date, home_currency="USD",
-            current_available_balance=profile.current_available_balance,
-            minimum_balance_to_keep=profile.minimum_balance_to_keep,
-            recurring_expenses=recurring_expenses,
-            recurring_income=recurring_income
-        )
-        
-        # 1. Check max safe amount for single payment
-        max_safe = find_max_safe_amount(state, request_amount)
-        
-        if max_safe >= request_amount:
-            # Can pay in full
-            status = "affordable_now"
-            method = "full_payment"
-            plan_amt = float(request_amount)
-            plan = [{"date": request_date.isoformat(), "amount": plan_amt}]
-        else:
-            # Need a payment plan
-            plans = generate_payment_plans(state, request_amount, max_months=1)
-            if plans:
-                best_plan = plans[-1]  # Take the longest (most affordable) plan
-                status = "affordable_with_plan"
-                method = "payment_plan"
-                plan_amt = best_plan["monthly_payment"]
-                plan = []
-                d = request_date
-                for _ in range(best_plan["months"]):
-                    plan.append({"date": d.isoformat(), "amount": plan_amt})
-                    d = d.replace(month=d.month+1) if d.month < 12 else d.replace(year=d.year+1, month=1)
-            else:
-                status = "not_affordable"
-                method = "none"
-                plan_amt = 0.0
-                plan = []
-                
-        latency = (time.time() - start_time) * 1000
-        
-        predictions.append({
-            "request_id": req_id,
-            "status": status,
-            "method": method,
-            "amount": plan_amt,
-            "plan": plan,
-            "safety_violations": 0,
-            "fallback": False,
-            "llm_calls": 0,
-            "latency_ms": latency
-        })
-        
+            
+            latency = (time.time() - start_time) * 1000
+            
+            plans = pipeline_result["plans"]
+            best_plan = plans[0] if plans else None
+            
+            predictions.append({
+                "request_id": req.purchase.request_id,
+                "latency_ms": latency,
+                "expected_decision": record.get("expected_decision", "unknown"),
+                "decision": {
+                    "status": pipeline_result["status"],
+                    "safe_amount_today": float(pipeline_result["explanation"].safe_amount_today),
+                    "is_affordable": pipeline_result["status"] in ["affordable_now", "affordable_with_plan"],
+                    "recommended_method": best_plan.method if best_plan else "none",
+                    "lowest_projected_balance": float(pipeline_result["explanation"].lowest_projected_balance),
+                    "safety_margin": float(pipeline_result["explanation"].safety_margin),
+                    "risk_flags": best_plan.risk_flags if best_plan else []
+                }
+            })
+            
+        except ValidationError as e:
+            print(f"Validation error for record: {e}")
+        except Exception as e:
+            print(f"Error processing record: {e}")
+            
     with open(output_file, "w") as f:
         for p in predictions:
             f.write(json.dumps(p) + "\n")
             
-    print(f"Generated {len(predictions)} V2 predictions at {output_file}")
+    print(f"Processed {len(predictions)} records. Saved to {output_file}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", required=True, type=Path)
-    parser.add_argument("--out", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     
-    run_v2_engine(args.dataset, args.out)
+    run_v2_engine(args.dataset, args.output)

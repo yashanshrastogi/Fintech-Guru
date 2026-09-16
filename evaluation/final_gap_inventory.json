@@ -1,0 +1,56 @@
+[
+  {
+    "file": "frontend/src/app/page.tsx",
+    "line": 7,
+    "category": "REAL PRODUCTION GAP",
+    "severity": "HIGH",
+    "current_behavior": "Hardcoded base profile",
+    "required_final_behavior": "Fetch profile from API using a real session ID",
+    "status": "NOT_STARTED"
+  },
+  {
+    "file": "frontend/src/app/page.tsx",
+    "line": 108,
+    "category": "REAL PRODUCTION GAP",
+    "severity": "HIGH",
+    "current_behavior": "Mock 90-day forecast array",
+    "required_final_behavior": "Use the real cashflow simulation data returned by the API",
+    "status": "NOT_STARTED"
+  },
+  {
+    "file": "llm/client.py",
+    "line": 23,
+    "category": "REAL PRODUCTION GAP",
+    "severity": "MEDIUM",
+    "current_behavior": "Hardcoded localhost:11434 endpoint",
+    "required_final_behavior": "Read from environment variables (OLLAMA_BASE_URL)",
+    "status": "NOT_STARTED"
+  },
+  {
+    "file": "app/main.py",
+    "line": 290,
+    "category": "REAL PRODUCTION GAP",
+    "severity": "MEDIUM",
+    "current_behavior": "Hardcoded localhost:11434 when instantiating LLMClient",
+    "required_final_behavior": "Use injected configuration from environment",
+    "status": "NOT_STARTED"
+  },
+  {
+    "file": "llm/fallback.py",
+    "line": 6,
+    "category": "DEAD CODE / TEST ONLY",
+    "severity": "LOW",
+    "current_behavior": "Mocks multi-agent pipeline",
+    "required_final_behavior": "Ensure it is not used in production path",
+    "status": "VERIFIED"
+  },
+  {
+    "file": "app/",
+    "line": 0,
+    "category": "REAL PRODUCTION GAP",
+    "severity": "CRITICAL",
+    "current_behavior": "Monolithic script, no persistence, no RESTful controllers",
+    "required_final_behavior": "Implement full REST API with persistence (SQLite/Postgres or Document DB)",
+    "status": "NOT_STARTED"
+  }
+]

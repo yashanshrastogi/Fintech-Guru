@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 from core.state import FinancialState
-from core.models import RecurringPattern
+from core.models import RecurringIncome
 
 def test_effective_salary_override():
     state = FinancialState(
@@ -11,12 +11,12 @@ def test_effective_salary_override():
         current_available_balance=Decimal("1000"),
         minimum_balance_to_keep=Decimal("100"),
         recurring_income=[
-            RecurringPattern(
+            RecurringIncome(
                 user_id="user_1", category="salary", direction="credit",
                 average_amount=Decimal("5000"), currency="USD", frequency_days=30,
-                typical_day_of_month=15, flexibility="fixed", minimum_allowed_amount=None,
-                representative_event_id="e1", last_date=date(2026, 8, 15), next_expected_date=date(2026, 9, 15),
-                is_salary=True
+                typical_day_of_month=15, 
+                last_date=date(2026, 8, 15), next_expected_date=date(2026, 9, 15),
+                is_salary=True, source="Employer"
             )
         ],
         evidence_overrides={
@@ -36,12 +36,12 @@ def test_effective_salary_fallback():
         current_available_balance=Decimal("1000"),
         minimum_balance_to_keep=Decimal("100"),
         recurring_income=[
-            RecurringPattern(
+            RecurringIncome(
                 user_id="user_1", category="salary", direction="credit",
                 average_amount=Decimal("5000"), currency="USD", frequency_days=30,
-                typical_day_of_month=15, flexibility="fixed", minimum_allowed_amount=None,
-                representative_event_id="e1", last_date=date(2026, 8, 15), next_expected_date=date(2026, 9, 15),
-                is_salary=True
+                typical_day_of_month=15, 
+                last_date=date(2026, 8, 15), next_expected_date=date(2026, 9, 15),
+                is_salary=True, source="Employer"
             )
         ],
         evidence_overrides={

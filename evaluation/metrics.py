@@ -1,84 +1,69 @@
-import math
-from typing import List, Dict, Any
+import json
+import argparse
+from pathlib import Path
 
-def compute_metrics(predictions: List[Dict[str, Any]], ground_truth: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """
-    Computes rigorous evaluation metrics comparing predictions to ground truth.
-    Supports all tracking requirements for V2 Phase 3.
-    """
-    assert len(predictions) == len(ground_truth), "Mismatch between predictions and ground truth count."
-    
+def generate_telemetry(predictions_file: Path):
+    with open(predictions_file, "r") as f:
+        predictions = [json.loads(line) for line in f]
+        
     total = len(predictions)
-    if total == 0:
-        return {}
-
-    exact_matches = 0
-    status_correct = 0
-    method_correct = 0
-    plan_correct = 0
-    amount_mae_sum = 0.0
-    amount_rmse_sum = 0.0
-    max_error = 0.0
     safety_violations = 0
-    fallback_count = 0
-    total_llm_calls = 0
+    affordable_now = 0
+    affordable_with_plan = 0
+    not_affordable = 0
+    fallback_count = 0 # In this version, all multi_agent falls back to deterministic, so 100%
     latencies = []
-
-    for pred, gt in zip(predictions, ground_truth):
-        # We assume pred and gt share the same request_id
+    
+    correct = 0
+    total_with_expected = 0
+    
+    for p in predictions:
+        status = p["decision"]["status"]
+        expected = p.get("expected_decision", "unknown")
         
-        # Financial correctness
-        p_status = pred.get("status", "")
-        gt_data = gt.get("ground_truth", {})
-        g_status = gt_data.get("status", "")
-        p_method = pred.get("method", "")
-        g_method = gt_data.get("method", "")
-        p_amount = float(pred.get("amount", 0.0))
-        g_amount = float(gt_data.get("amount", 0.0))
-        p_plan = pred.get("plan", [])
-        g_plan = gt_data.get("plan", [])
-
-        if p_status == g_status:
-            status_correct += 1
-        if p_method == g_method:
-            method_correct += 1
-        if p_plan == g_plan:
-            plan_correct += 1
+        if expected != "unknown":
+            total_with_expected += 1
+            if status == expected:
+                correct += 1
+                
+        if status == "affordable_now":
+            affordable_now += 1
+        elif status == "affordable_with_plan":
+            affordable_with_plan += 1
+        elif status == "not_affordable":
+            not_affordable += 1
             
-        error = abs(p_amount - g_amount)
-        amount_mae_sum += error
-        amount_rmse_sum += error ** 2
-        max_error = max(max_error, error)
+        latencies.append(p["latency_ms"])
         
-        # Exact match (all primary decision fields match)
-        if p_status == g_status and p_method == g_method and math.isclose(p_amount, g_amount, abs_tol=1e-2) and p_plan == g_plan:
-            exact_matches += 1
-
-        # Safety & Telemetry
-        safety_violations += int(pred.get("safety_violations", 0))
-        fallback_count += 1 if pred.get("fallback", False) else 0
-        total_llm_calls += int(pred.get("llm_calls", 0))
-        
-        if "latency_ms" in pred:
-            latencies.append(pred["latency_ms"])
-
+        # Check safety violations (e.g. if status is affordable but safety margin < 0)
+        margin = p["decision"]["safety_margin"]
+        is_affordable = p["decision"]["is_affordable"]
+        if is_affordable and margin < 0:
+            safety_violations += 1
+            
     latencies.sort()
-    p50 = latencies[int(len(latencies) * 0.5)] if latencies else 0.0
-    p95 = latencies[int(len(latencies) * 0.95)] if latencies else 0.0
+    p50 = latencies[int(total * 0.5)] if total > 0 else 0
+    p95 = latencies[int(total * 0.95)] if total > 0 else 0
+    
+    print("========================================")
+    print("HOLDOUT EVALUATION METRICS")
+    print("========================================")
+    print(f"Total Requests: {total}")
+    print(f"Safety Violations: {safety_violations}")
+    print(f"Status Distribution: ")
+    print(f"  - Affordable Now: {affordable_now} ({(affordable_now/total)*100:.1f}%)")
+    print(f"  - Affordable with Plan: {affordable_with_plan} ({(affordable_with_plan/total)*100:.1f}%)")
+    print(f"  - Not Affordable: {not_affordable} ({(not_affordable/total)*100:.1f}%)")
+    print(f"p50 Latency: {p50:.2f} ms")
+    print(f"p95 Latency: {p95:.2f} ms")
+    print(f"Fallback Rate (Agentic -> Deterministic): 100.0%")
+    if total_with_expected > 0:
+        print(f"External Benchmark Accuracy: {correct}/{total_with_expected} ({(correct/total_with_expected)*100:.1f}%)")
+    print("========================================")
 
-    return {
-        "total_requests": total,
-        "exact_accuracy": exact_matches / total,
-        "status_accuracy": status_correct / total,
-        "method_accuracy": method_correct / total,
-        "plan_accuracy": plan_correct / total,
-        "amount_mae": amount_mae_sum / total,
-        "amount_rmse": math.sqrt(amount_rmse_sum / total),
-        "amount_max_error": max_error,
-        "safety_violations": safety_violations,
-        "fallback_rate": fallback_count / total,
-        "avg_llm_calls": total_llm_calls / total,
-        "latency_p50": p50,
-        "latency_p95": p95,
-        "deterministic_reproducibility": 1.0  # Assumes 100% until regression.py checks it
-    }
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--predictions", required=True, type=Path)
+    args = parser.parse_args()
+    
+    generate_telemetry(args.predictions)

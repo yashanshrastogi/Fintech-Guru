@@ -1,7 +1,7 @@
 from datetime import date
 from decimal import Decimal
 from core.state import FinancialState
-from core.models import RecurringPattern
+from core.models import RecurringExpense
 from optimization.engine import find_max_safe_amount
 
 def test_find_max_safe_amount_full():
@@ -27,11 +27,11 @@ def test_find_max_safe_amount_with_upcoming_expense():
         user_id="u1", request_date=date(2026, 9, 15), home_currency="USD",
         current_available_balance=Decimal("600"), minimum_balance_to_keep=Decimal("100"),
         recurring_expenses=[
-            RecurringPattern(
+            RecurringExpense(
                 user_id="u1", category="rent", direction="debit", average_amount=Decimal("300"),
                 currency="USD", frequency_days=100, typical_day_of_month=None, flexibility="fixed",
-                minimum_allowed_amount=None, representative_event_id="e1", 
-                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16), is_salary=False
+                minimum_allowed_amount=None,
+                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16)
             )
         ]
     )
@@ -47,11 +47,11 @@ def test_baseline_unsafe():
         user_id="u1", request_date=date(2026, 9, 15), home_currency="USD",
         current_available_balance=Decimal("200"), minimum_balance_to_keep=Decimal("100"),
         recurring_expenses=[
-            RecurringPattern(
+            RecurringExpense(
                 user_id="u1", category="rent", direction="debit", average_amount=Decimal("300"),
                 currency="USD", frequency_days=30, typical_day_of_month=None, flexibility="fixed",
-                minimum_allowed_amount=None, representative_event_id="e1", 
-                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16), is_salary=False
+                minimum_allowed_amount=None, 
+                last_date=date(2026, 8, 16), next_expected_date=date(2026, 9, 16)
             )
         ]
     )
