@@ -20,8 +20,8 @@ def generate_payment_plans(state: FinancialState, total_amount: Decimal, max_mon
         
     plans = []
     
-    # Cap iterations to a reasonable maximum if user didn't specify
-    max_iterations = max_months if (max_months and max_months > 0) else 12
+    # Cap iterations to a reasonable maximum to prevent CPU denial of service
+    max_iterations = min(max_months if (max_months and max_months > 0) else 12, 36)
     # We only forecast 90 days, so plans beyond 3-4 months can only be partially simulated.
     # We will simulate up to the 90-day horizon.
     
@@ -48,11 +48,14 @@ def generate_payment_plans(state: FinancialState, total_amount: Decimal, max_mon
         test_days = simulate_cashflow(state, extra_debits=schedule)
         
         if is_plan_safe(test_days, state.minimum_balance_to_keep):
+            # Calculate the lowest balance in the simulated cashflow window
+            lowest_bal = min((d.closing_balance for d in test_days), default=ZERO)
             plans.append({
                 "months": months,
                 "monthly_payment": float(monthly_payment),
                 "total_amount": float(total_amount),
                 "installments": [float(amt) for amt in installments],
+                "lowest_balance": lowest_bal,
                 "is_safe": True
             })
             

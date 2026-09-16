@@ -43,9 +43,9 @@ This audit traces the execution path of a single V2 production-style request to 
 
 ### 8. Safety Boundary (Phase 17)
 * **Expected:** `validation/boundary.py` (`enforce_hard_safety_boundary`) runs as the absolute last step before returning the decision to prevent mathematical bankruptcy.
-* **Actual:** **NOT WIRED**. The engine assumes `generate_payment_plans` is safe and returns the plan without passing it through the final, uncatchable exception guard.
+* **Actual:** **WIRED**. The engine explicitly throws all proposed plans against `enforce_hard_safety_boundary` inside `deterministic_pipeline` and discards any that fail.
 * **V1 Leakage:** None.
-* **Impact:** Missed secondary layer of protection against logical bugs.
+* **Impact:** Mathematical safety is strictly guaranteed.
 
 ---
 

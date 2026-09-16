@@ -21,6 +21,11 @@ def generate_telemetry(predictions_file: Path):
         status = p["decision"]["status"]
         expected = p.get("expected_decision", "unknown")
         
+        # Check if the fallback meta was injected
+        meta = p["decision"].get("explanation", {}).get("_meta", {})
+        if isinstance(meta, dict) and meta.get("executed_as") == "deterministic_fallback":
+            fallback_count += 1
+            
         if expected != "unknown":
             total_with_expected += 1
             if status == expected:
@@ -45,6 +50,8 @@ def generate_telemetry(predictions_file: Path):
     p50 = latencies[int(total * 0.5)] if total > 0 else 0
     p95 = latencies[int(total * 0.95)] if total > 0 else 0
     
+    fallback_rate = (fallback_count / total * 100) if total > 0 else 0.0
+    
     print("========================================")
     print("HOLDOUT EVALUATION METRICS")
     print("========================================")
@@ -56,7 +63,7 @@ def generate_telemetry(predictions_file: Path):
     print(f"  - Not Affordable: {not_affordable} ({(not_affordable/total)*100:.1f}%)")
     print(f"p50 Latency: {p50:.2f} ms")
     print(f"p95 Latency: {p95:.2f} ms")
-    print(f"Fallback Rate (Agentic -> Deterministic): 100.0%")
+    print(f"Fallback Rate (Agentic -> Deterministic): {fallback_rate:.1f}%")
     if total_with_expected > 0:
         print(f"External Benchmark Accuracy: {correct}/{total_with_expected} ({(correct/total_with_expected)*100:.1f}%)")
     print("========================================")

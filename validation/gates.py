@@ -23,9 +23,9 @@ def evaluate_quality_gates(metrics_path: Path):
     print(f"Target Safety Violations == 0 | Actual: {safety_violations}")
     
     failed = False
-    
-    if accuracy < 0.90:
-        print("FAILED: Accuracy is below the 90% threshold.")
+    import math
+    if accuracy is None or not isinstance(accuracy, (int, float)) or not math.isfinite(accuracy) or accuracy < 0.90:
+        raise ValueError(f"Accuracy must be a finite number >= 0.90, got {accuracy}")
         failed = True
         
     if safety_violations > 0:

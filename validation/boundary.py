@@ -68,8 +68,8 @@ def enforce_hard_safety_boundary(state: FinancialState, req_amt: Decimal, candid
             except ValueError:
                 raise SafetyViolationError(f"Installment {idx} date is malformed: {inst['date']}")
                 
-        if not isinstance(inst_date, date):
-            raise SafetyViolationError(f"Installment {idx} date must be a date object.")
+        if type(inst_date) is not date:
+            raise SafetyViolationError(f"Installment {idx} date must be exactly a date object, not datetime.")
             
         # Ensure dates are valid
         if inst_date < state.request_date:

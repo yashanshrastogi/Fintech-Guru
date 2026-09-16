@@ -1,6 +1,9 @@
 import requests
 import json
 import time
+import pytest
+
+pytestmark = pytest.mark.skip(reason="Requires running docker instance with auth")
 
 BASE_URL = "http://localhost:8000/api/v1"
 
