@@ -48,6 +48,7 @@ jobs:
     - name: Run All Tests
       env:
         DATABASE_URL: sqlite:///./test.db # Use sqlite for unit tests of engine if needed, or postgres
+        PYTHONPATH: ${{ github.workspace }}
       run: |
         # Run all tests instead of just failure injection
         pytest tests/ -v --cov=core --cov=app --cov=validation --cov=optimization
