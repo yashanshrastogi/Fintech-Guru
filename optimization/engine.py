@@ -49,8 +49,8 @@ def find_max_safe_amount(state: FinancialState, requested_amount: Decimal) -> De
         # Quantize to 2 decimals to prevent infinite loop on floats
         mid = mid.quantize(Decimal("0.01"))
         
-        # If mid didn't move from low (due to quantize), break
-        if mid == low:
+        # If mid didn't move from low or high (due to quantize), break
+        if mid == low or mid == high:
             break
             
         test_days = simulate_cashflow(state, extra_debits=[(state.request_date, mid)])
