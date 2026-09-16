@@ -42,19 +42,6 @@ def run_v2_engine(dataset_file: Path, output_file: Path):
         # Parse recurring events
         recurring_expenses = []
         recurring_income = []
-        
-        # Add salary from profile
-        if "salary" in prof:
-            recurring_income.append(
-                RecurringPattern(
-                    user_id="u1", category="salary", direction="credit",
-                    average_amount=Decimal(str(prof["salary"])), currency="USD",
-                    frequency_days=30, typical_day_of_month=15,
-                    flexibility="fixed", minimum_allowed_amount=None, representative_event_id="ex",
-                    last_date=date(2026, 8, 15), next_expected_date=date(2026, 9, 15),
-                    is_salary=True
-                )
-            )
             
         for e in inp.get("recurring_events", []):
             pattern = RecurringPattern(
@@ -90,7 +77,7 @@ def run_v2_engine(dataset_file: Path, output_file: Path):
             plan = [{"date": request_date.isoformat(), "amount": plan_amt}]
         else:
             # Need a payment plan
-            plans = generate_payment_plans(state, request_amount, max_months=3)
+            plans = generate_payment_plans(state, request_amount, max_months=1)
             if plans:
                 best_plan = plans[-1]  # Take the longest (most affordable) plan
                 status = "affordable_with_plan"

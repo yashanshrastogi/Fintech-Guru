@@ -29,13 +29,14 @@ def compute_metrics(predictions: List[Dict[str, Any]], ground_truth: List[Dict[s
         
         # Financial correctness
         p_status = pred.get("status", "")
-        g_status = gt.get("status", "")
+        gt_data = gt.get("ground_truth", {})
+        g_status = gt_data.get("status", "")
         p_method = pred.get("method", "")
-        g_method = gt.get("method", "")
+        g_method = gt_data.get("method", "")
         p_amount = float(pred.get("amount", 0.0))
-        g_amount = float(gt.get("amount", 0.0))
+        g_amount = float(gt_data.get("amount", 0.0))
         p_plan = pred.get("plan", [])
-        g_plan = gt.get("plan", [])
+        g_plan = gt_data.get("plan", [])
 
         if p_status == g_status:
             status_correct += 1
