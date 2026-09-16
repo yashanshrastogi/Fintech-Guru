@@ -1,0 +1,62 @@
+[
+  {
+    "component": "Authentication",
+    "issue": "Hardcoded user 'u123' in frontend and backend endpoints",
+    "classification": "SECURITY GAP",
+    "file_references": ["frontend/src/app/page.tsx", "app/api/endpoints/assistant.py"]
+  },
+  {
+    "component": "LLM Provider",
+    "issue": "Hardcoded localhost:11434, no provider abstraction, no timeout/retry policy",
+    "classification": "PRODUCTION GAP",
+    "file_references": ["llm/client.py", "app/engine.py", "scratch/smoke_test_real_qwen.py"]
+  },
+  {
+    "component": "Frontend Configuration",
+    "issue": "Hardcoded localhost:8000 for NEXT_PUBLIC_API_URL in docker-compose",
+    "classification": "CLOUD GAP",
+    "file_references": ["docker-compose.yml", "frontend/src/app/page.tsx"]
+  },
+  {
+    "component": "Evidence Extraction",
+    "issue": "Mock file extraction instead of actual PDF/Image parsing logic",
+    "classification": "PARTIAL",
+    "file_references": ["app/api/endpoints/evidence.py"]
+  },
+  {
+    "component": "Assistant Logic",
+    "issue": "Fake recent salary event injection",
+    "classification": "DEV-ONLY",
+    "file_references": ["app/api/endpoints/assistant.py"]
+  },
+  {
+    "component": "Database Migration",
+    "issue": "SQLite-only assumptions, no Alembic, no PostgreSQL configured",
+    "classification": "PRODUCTION GAP",
+    "file_references": ["app/db/database.py", "app/main.py"]
+  },
+  {
+    "component": "CI/CD",
+    "issue": "No GitHub Actions workflows or automated release pipeline",
+    "classification": "CLOUD GAP",
+    "file_references": [".github/workflows/"]
+  },
+  {
+    "component": "Security",
+    "issue": "No CORS restriction, missing rate limiting, no file upload security",
+    "classification": "SECURITY GAP",
+    "file_references": ["app/main.py", "app/api/endpoints/evidence.py"]
+  },
+  {
+    "component": "Object Storage",
+    "issue": "No cloud object storage abstraction for evidence uploads",
+    "classification": "CLOUD GAP",
+    "file_references": ["app/api/endpoints/evidence.py"]
+  },
+  {
+    "component": "Observability",
+    "issue": "Basic logging exists, but lacks metrics, alerts, and distinct trace IDs per session",
+    "classification": "OPTIONAL",
+    "file_references": ["app/telemetry.py"]
+  }
+]

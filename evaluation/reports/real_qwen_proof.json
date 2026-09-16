@@ -1,0 +1,23 @@
+{
+  "test": "real_qwen_smoke_test",
+  "model": "qwen3:8b",
+  "endpoint": "http://localhost:11434",
+  "mock_used": false,
+  "test_message": "My salary increased from 60000 to 70000 starting next month.",
+  "llm_latency_ms": 5658.3,
+  "pipeline_latency_ms": 9705.6,
+  "llm_calls": 1,
+  "extracted_evidence": {
+    "extracted_salary": 70000.0,
+    "salary_effective_date": "2025-10-01",
+    "extracted_amount": null,
+    "cancellation_request": false,
+    "cancelled_category": null,
+    "currency": null
+  },
+  "extracted_salary_correct": true,
+  "salary_propagated_to_state": true,
+  "final_decision_status": "affordable_now",
+  "final_explanation_summary": "You can afford this",
+  "safe_amount": 85000.0
+}

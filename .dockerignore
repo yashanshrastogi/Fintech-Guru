@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+__pycache__
+*.pyc
+logs
+test_reports
+frontend/node_modules
+frontend/.next

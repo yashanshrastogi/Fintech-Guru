@@ -1,0 +1,16 @@
+{
+  "total_requests": 225,
+  "exact_accuracy": 0.0,
+  "status_accuracy": 0.0,
+  "method_accuracy": 0.0,
+  "plan_accuracy": 0.7333333333333333,
+  "amount_mae": 2632.1911111111112,
+  "amount_rmse": 5768.770553785462,
+  "amount_max_error": 19024.0,
+  "safety_violations": 0,
+  "fallback_rate": 0.0,
+  "avg_llm_calls": 0.0,
+  "latency_p50": 1.5,
+  "latency_p95": 1.5,
+  "deterministic_reproducibility": 1.0
+}

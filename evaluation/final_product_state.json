@@ -1,0 +1,155 @@
+{
+  "CORE_ENGINE": {
+    "status": "VERIFIED",
+    "evidence": "99.6% fresh holdout agreement, semantic invariants pass",
+    "test_command": "pytest tests/test_engine.py tests/test_semantic_rules.py",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-16",
+    "confidence": "HIGH",
+    "known_risks": "Minor timezone/date boundary edge cases"
+  },
+  "SAFETY": {
+    "status": "VERIFIED",
+    "evidence": "Hard safety boundary enforces minimum reserve, tests pass",
+    "test_command": "pytest tests/test_boundary.py",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-16",
+    "confidence": "HIGH",
+    "known_risks": "None"
+  },
+  "EVIDENCE": {
+    "status": "PARTIAL",
+    "evidence": "Qwen fallback extraction works, but no real file upload pipeline yet",
+    "test_command": "pytest tests/test_evidence.py",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-15",
+    "confidence": "MEDIUM",
+    "known_risks": "Malicious file uploads, parsing errors"
+  },
+  "QWEN": {
+    "status": "PARTIAL",
+    "evidence": "Client works, but hardcoded localhost and missing timeout/retry policies",
+    "test_command": "python scratch/smoke_test_real_qwen.py",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-15",
+    "confidence": "HIGH",
+    "known_risks": "Availability outages"
+  },
+  "API": {
+    "status": "NOT_STARTED",
+    "evidence": "Only monolithic app/main.py exists, no REST controllers",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Routing, Pydantic validation complexity"
+  },
+  "PERSISTENCE": {
+    "status": "NOT_STARTED",
+    "evidence": "No database or ORM configured",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Schema migrations, session isolation"
+  },
+  "AUTH": {
+    "status": "NOT_STARTED",
+    "evidence": "No authentication mechanism",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "IDOR vulnerabilities"
+  },
+  "SECURITY": {
+    "status": "NOT_STARTED",
+    "evidence": "SECURITY.md exists but mitigations aren't fully implemented in API",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Path traversal, injection"
+  },
+  "FRONTEND": {
+    "status": "PARTIAL",
+    "evidence": "Basic scaffold exists, mocks used for profile and charts",
+    "test_command": "npm run build",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-16",
+    "confidence": "MEDIUM",
+    "known_risks": "Integration mismatches"
+  },
+  "ASSISTANT": {
+    "status": "NOT_STARTED",
+    "evidence": "No chat state or endpoint exists",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Context limits, hallucination"
+  },
+  "WHAT_IF": {
+    "status": "NOT_STARTED",
+    "evidence": "No endpoint for scenarios",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Accidentally modifying base state"
+  },
+  "FILE_UPLOAD": {
+    "status": "NOT_STARTED",
+    "evidence": "No endpoint or storage",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "MIME spoofing, storage exhaustion"
+  },
+  "OBSERVABILITY": {
+    "status": "PARTIAL",
+    "evidence": "Structured logging in core, but API tracing missing",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "MEDIUM",
+    "known_risks": "PII leakage in logs"
+  },
+  "DEPLOYMENT": {
+    "status": "PARTIAL",
+    "evidence": "Dockerfile/compose exists but not tested end-to-end",
+    "test_command": "docker compose config",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-16",
+    "confidence": "MEDIUM",
+    "known_risks": "Environment variable mismatches"
+  },
+  "TESTING": {
+    "status": "PARTIAL",
+    "evidence": "73 tests pass for core logic, no integration tests for API",
+    "test_command": "pytest",
+    "latest_test_result": "PASS",
+    "last_modified": "2026-09-16",
+    "confidence": "MEDIUM",
+    "known_risks": "Flaky API tests"
+  },
+  "DOCUMENTATION": {
+    "status": "PARTIAL",
+    "evidence": "README, SECURITY, AUDIT exist. Missing RUNBOOK and API docs",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "MEDIUM",
+    "known_risks": "Outdated setup instructions"
+  },
+  "E2E": {
+    "status": "NOT_STARTED",
+    "evidence": "No playwright/cypress or manual browser validation script",
+    "test_command": "N/A",
+    "latest_test_result": "N/A",
+    "last_modified": "2026-09-16",
+    "confidence": "LOW",
+    "known_risks": "Broken user flows"
+  }
+}

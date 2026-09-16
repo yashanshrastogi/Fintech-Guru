@@ -1,0 +1,17 @@
+fastapi==0.141.1
+uvicorn==0.34.0
+pydantic==2.10.5
+python-dateutil==2.9.0.post0
+requests
+sqlalchemy==2.0.23
+python-multipart==0.0.6
+numpy
+python-dotenv
+httpx
+pydantic-settings
+passlib[bcrypt]==1.7.4
+bcrypt==3.2.2
+python-jose
+alembic
+psycopg2-binary
+boto3

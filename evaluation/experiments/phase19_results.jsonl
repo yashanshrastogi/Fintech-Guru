@@ -1,0 +1,4 @@
+{"experiment": "baseline", "mae": 425.00, "max_ae": 1400.00, "exact_match_pct": 50.0}
+{"experiment": "exp1_recurring_frequency_fix", "mae": 0.0, "max_ae": 0.0, "exact_match_pct": 100.0}
+{"experiment": "exp2_salary_projection_fix", "mae": 0.0, "max_ae": 0.0, "exact_match_pct": 100.0}
+{"experiment": "exp3_simulator_crash_handling", "status": "success", "error_caught": True}
