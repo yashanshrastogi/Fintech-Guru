@@ -1,0 +1,225 @@
+{"request_id": "req_23a29052", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_afd9b257", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8ebe87f2", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6ece8f35", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c78f25cd", "status": "affordable_now", "method": "full_payment", "amount": 4719, "plan": [{"date": "2026-09-15", "amount": 4719}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6b2b9485", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_04f8bf33", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_21e6ef68", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_450fef70", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_35318f5c", "status": "affordable_now", "method": "full_payment", "amount": 11711, "plan": [{"date": "2026-09-15", "amount": 11711}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_65f422c3", "status": "affordable_now", "method": "full_payment", "amount": 11085, "plan": [{"date": "2026-09-15", "amount": 11085}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_28eda4f1", "status": "affordable_now", "method": "full_payment", "amount": 16926, "plan": [{"date": "2026-09-15", "amount": 16926}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_eb61ad6b", "status": "affordable_now", "method": "full_payment", "amount": 5930, "plan": [{"date": "2026-09-15", "amount": 5930}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0369fe14", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fbf4f662", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3c2a51e8", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_84b9458d", "status": "affordable_now", "method": "full_payment", "amount": 11463, "plan": [{"date": "2026-09-15", "amount": 11463}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_351b822b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3518800d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_77610cd5", "status": "affordable_now", "method": "full_payment", "amount": 1592, "plan": [{"date": "2026-09-15", "amount": 1592}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_47ecad32", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_ee80fe90", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_902854c8", "status": "affordable_now", "method": "full_payment", "amount": 10002, "plan": [{"date": "2026-09-15", "amount": 10002}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e9b62c06", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_f6a2b810", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_67176e77", "status": "affordable_now", "method": "full_payment", "amount": 10054, "plan": [{"date": "2026-09-15", "amount": 10054}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e7f7a7a1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e7120319", "status": "affordable_now", "method": "full_payment", "amount": 13104, "plan": [{"date": "2026-09-15", "amount": 13104}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a8e6f209", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_339fdc1f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_93532c3d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d4b8f7fe", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7286d6cd", "status": "affordable_now", "method": "full_payment", "amount": 6637, "plan": [{"date": "2026-09-15", "amount": 6637}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_950f595a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_814a89a6", "status": "affordable_now", "method": "full_payment", "amount": 12895, "plan": [{"date": "2026-09-15", "amount": 12895}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8000970b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_ce41b736", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e5b8ad0d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_04c5dc9a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_09b0dc5e", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e5f79ed3", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8d65f1c1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e5a02951", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_cf3b5eff", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_bdac01b6", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b1da7fe3", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e0b5be46", "status": "affordable_now", "method": "full_payment", "amount": 6341, "plan": [{"date": "2026-09-15", "amount": 6341}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fe9618da", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8b39f93a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_30c89337", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_103e825f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_edafb00a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_81a52169", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4999bcf3", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_aba5c279", "status": "affordable_now", "method": "full_payment", "amount": 18494, "plan": [{"date": "2026-09-15", "amount": 18494}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c2f05818", "status": "affordable_now", "method": "full_payment", "amount": 11564, "plan": [{"date": "2026-09-15", "amount": 11564}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a9ce9453", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d18406a7", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d69e9ba3", "status": "affordable_now", "method": "full_payment", "amount": 8510, "plan": [{"date": "2026-09-15", "amount": 8510}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_61331ebd", "status": "affordable_now", "method": "full_payment", "amount": 10802, "plan": [{"date": "2026-09-15", "amount": 10802}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_26267bb8", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d9240549", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_93893d71", "status": "affordable_now", "method": "full_payment", "amount": 15153, "plan": [{"date": "2026-09-15", "amount": 15153}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_84ac6916", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0ea91765", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_62182927", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d5509a1d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1fd86106", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4aa17d52", "status": "affordable_now", "method": "full_payment", "amount": 1449, "plan": [{"date": "2026-09-15", "amount": 1449}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_39ba00eb", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_f76d052a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d6f2a1b1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a1036f99", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_60a54bfe", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_f47ec90f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3d283640", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fe86b76b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1c9c3613", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b50bbf83", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_61eba812", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4810e062", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6a58edc1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8e30f167", "status": "affordable_now", "method": "full_payment", "amount": 12765, "plan": [{"date": "2026-09-15", "amount": 12765}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4e87f337", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d641a5fd", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a46b3722", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_9a4e92ea", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3d5f5e44", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_810419d8", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a274f5e6", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_9dcfc018", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_34ee8459", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_2962eea6", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b6bda7ee", "status": "affordable_now", "method": "full_payment", "amount": 2171, "plan": [{"date": "2026-09-15", "amount": 2171}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1ab062e2", "status": "affordable_now", "method": "full_payment", "amount": 17344, "plan": [{"date": "2026-09-15", "amount": 17344}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_9ab332ea", "status": "affordable_now", "method": "full_payment", "amount": 6838, "plan": [{"date": "2026-09-15", "amount": 6838}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_58600fcf", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b73efc28", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_388d5758", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_9f199b43", "status": "affordable_now", "method": "full_payment", "amount": 12526, "plan": [{"date": "2026-09-15", "amount": 12526}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_5bec4c85", "status": "affordable_now", "method": "full_payment", "amount": 800, "plan": [{"date": "2026-09-15", "amount": 800}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e0d82f3b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_04adbfdd", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d7b2c1dd", "status": "affordable_now", "method": "full_payment", "amount": 4134, "plan": [{"date": "2026-09-15", "amount": 4134}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_54ad46a7", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0199151e", "status": "affordable_now", "method": "full_payment", "amount": 7493, "plan": [{"date": "2026-09-15", "amount": 7493}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4aa24b1f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1247a477", "status": "affordable_now", "method": "full_payment", "amount": 16909, "plan": [{"date": "2026-09-15", "amount": 16909}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e5125690", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7269bca1", "status": "affordable_now", "method": "full_payment", "amount": 16785, "plan": [{"date": "2026-09-15", "amount": 16785}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_ae768d99", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_5a8bd68a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0e7ae9ed", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_30ee277b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_12535d91", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1f9e4850", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_f5318f7b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_439f6f4f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0b423c6d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8b432f4d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_705cbc68", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_48653229", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_45757f9d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_38296db6", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c076c399", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_11f7bee2", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_45447170", "status": "affordable_now", "method": "full_payment", "amount": 8784, "plan": [{"date": "2026-09-15", "amount": 8784}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_656ceae7", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_68800176", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_684329b9", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1c38d104", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_37785892", "status": "affordable_now", "method": "full_payment", "amount": 8869, "plan": [{"date": "2026-09-15", "amount": 8869}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_32e0a0db", "status": "affordable_now", "method": "full_payment", "amount": 13169, "plan": [{"date": "2026-09-15", "amount": 13169}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7d0acfd2", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fbf2f36b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_cb20e0bd", "status": "affordable_now", "method": "full_payment", "amount": 18722, "plan": [{"date": "2026-09-15", "amount": 18722}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_863e3c01", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_63ccb757", "status": "affordable_now", "method": "full_payment", "amount": 9721, "plan": [{"date": "2026-09-15", "amount": 9721}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_bd1fc3f2", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_334f762e", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c5fd724a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_4fbda541", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d03ffe37", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c47f6b49", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_bc121711", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fb7e2194", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_85681e3f", "status": "affordable_now", "method": "full_payment", "amount": 3405, "plan": [{"date": "2026-09-15", "amount": 3405}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_f2040533", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6b085a34", "status": "affordable_now", "method": "full_payment", "amount": 15421, "plan": [{"date": "2026-09-15", "amount": 15421}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_bf0bee8b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_2b57b40b", "status": "affordable_now", "method": "full_payment", "amount": 19024, "plan": [{"date": "2026-09-15", "amount": 19024}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_5f96d34c", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c9d006ec", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0f72737f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d61f064d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_538846e6", "status": "affordable_now", "method": "full_payment", "amount": 1022, "plan": [{"date": "2026-09-15", "amount": 1022}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_eda75bea", "status": "affordable_now", "method": "full_payment", "amount": 16823, "plan": [{"date": "2026-09-15", "amount": 16823}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c91bab4f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_2bd35ada", "status": "affordable_now", "method": "full_payment", "amount": 11120, "plan": [{"date": "2026-09-15", "amount": 11120}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a073939c", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_55772c83", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_e6b70af0", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_5c7455d5", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_05ecc868", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0a3caabd", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_841562b0", "status": "affordable_now", "method": "full_payment", "amount": 1220, "plan": [{"date": "2026-09-15", "amount": 1220}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_272e3f8c", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_0c30ff05", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_af297c43", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7b949176", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_39b92d45", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_fe3b8dba", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1180027b", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d25e5e18", "status": "affordable_now", "method": "full_payment", "amount": 11348, "plan": [{"date": "2026-09-15", "amount": 11348}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c1f95bb2", "status": "affordable_now", "method": "full_payment", "amount": 13717, "plan": [{"date": "2026-09-15", "amount": 13717}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_9a79ecb6", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a97c0a97", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3f34cb4d", "status": "affordable_now", "method": "full_payment", "amount": 3075, "plan": [{"date": "2026-09-15", "amount": 3075}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_39feca43", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_501bd847", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_60f313b1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7a2a1caf", "status": "affordable_now", "method": "full_payment", "amount": 11570, "plan": [{"date": "2026-09-15", "amount": 11570}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1b9b1afb", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3ce794b4", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_09dbac42", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d6a891ec", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8ae0b51e", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d476e95d", "status": "affordable_now", "method": "full_payment", "amount": 15004, "plan": [{"date": "2026-09-15", "amount": 15004}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_911e5bd1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_66034c74", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_d40d3508", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_05cf6221", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_56645401", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6a8d02db", "status": "affordable_now", "method": "full_payment", "amount": 11126, "plan": [{"date": "2026-09-15", "amount": 11126}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_dcb12153", "status": "affordable_now", "method": "full_payment", "amount": 17287, "plan": [{"date": "2026-09-15", "amount": 17287}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_43f01cc5", "status": "affordable_now", "method": "full_payment", "amount": 8603, "plan": [{"date": "2026-09-15", "amount": 8603}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_5e0c76ac", "status": "affordable_now", "method": "full_payment", "amount": 8894, "plan": [{"date": "2026-09-15", "amount": 8894}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a3a1856a", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_46d07c97", "status": "affordable_now", "method": "full_payment", "amount": 1028, "plan": [{"date": "2026-09-15", "amount": 1028}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_8db9324d", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_1b6e78c2", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_83b0bdb1", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b38ad21f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_b27a8c21", "status": "affordable_now", "method": "full_payment", "amount": 13286, "plan": [{"date": "2026-09-15", "amount": 13286}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_a3107595", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_24503127", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_3b04b1e5", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_632e2d9f", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_aa38e625", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c7a9287e", "status": "affordable_now", "method": "full_payment", "amount": 558, "plan": [{"date": "2026-09-15", "amount": 558}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_49bcf131", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c8d6c359", "status": "affordable_now", "method": "full_payment", "amount": 6322, "plan": [{"date": "2026-09-15", "amount": 6322}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_41538446", "status": "affordable_now", "method": "full_payment", "amount": 9025, "plan": [{"date": "2026-09-15", "amount": 9025}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_eef2c0de", "status": "affordable_now", "method": "full_payment", "amount": 7370, "plan": [{"date": "2026-09-15", "amount": 7370}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_ea019f89", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_2b7285be", "status": "affordable_now", "method": "full_payment", "amount": 7298, "plan": [{"date": "2026-09-15", "amount": 7298}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_c0c37f2e", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_2da1f112", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_6e3822cb", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_cc380d70", "status": "affordable_now", "method": "full_payment", "amount": 15538, "plan": [{"date": "2026-09-15", "amount": 15538}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_db4641a0", "status": "affordable_now", "method": "full_payment", "amount": 3585, "plan": [{"date": "2026-09-15", "amount": 3585}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_ea96fb69", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_478be7c3", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_7f04a840", "status": "not_affordable", "method": "none", "amount": 0.0, "plan": [], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
+{"request_id": "req_23ab187c", "status": "affordable_now", "method": "full_payment", "amount": 14113, "plan": [{"date": "2026-09-15", "amount": 14113}], "safety_violations": 0, "fallback": false, "llm_calls": 0, "latency_ms": 1.5}
