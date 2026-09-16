@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  fintech-guru-v2:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - ./logs:/app/logs
